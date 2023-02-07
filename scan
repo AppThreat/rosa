@@ -44,21 +44,12 @@ from lib.pyt.cfg_analyzer import deep_analysis
 from lib.pyt.formatters.json import report as py_json_report
 
 product_logo = """
-███████╗ ██████╗ █████╗ ███╗   ██╗
-██╔════╝██╔════╝██╔══██╗████╗  ██║
-███████╗██║     ███████║██╔██╗ ██║
-╚════██║██║     ██╔══██║██║╚██╗██║
-███████║╚██████╗██║  ██║██║ ╚████║
-╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝
-"""
-
-ngsast_logo = """
-███╗   ██╗ ██████╗     ███████╗ █████╗ ███████╗████████╗
-████╗  ██║██╔════╝     ██╔════╝██╔══██╗██╔════╝╚══██╔══╝
-██╔██╗ ██║██║  ███╗    ███████╗███████║███████╗   ██║
-██║╚██╗██║██║   ██║    ╚════██║██╔══██║╚════██║   ██║
-██║ ╚████║╚██████╔╝    ███████║██║  ██║███████║   ██║
-╚═╝  ╚═══╝ ╚═════╝     ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝
+██████╗  ██████╗ ███████╗ █████╗
+██╔══██╗██╔═══██╗██╔════╝██╔══██╗
+██████╔╝██║   ██║███████╗███████║
+██╔══██╗██║   ██║╚════██║██╔══██║
+██║  ██║╚██████╔╝███████║██║  ██║
+╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝
 """
 
 
@@ -390,11 +381,8 @@ def java_scan(src, reports_dir, convert, repo_context):
       convert Boolean to enable normalisation of reports json
       repo_context Repo context
     """
-    if inspect.is_authenticated():
-        inspect.inspect_scan("java", src, reports_dir, convert, repo_context)
-    else:
-        findsecbugs_scan(src, reports_dir, convert, repo_context)
-        pmd_scan(src, reports_dir, convert, repo_context)
+    findsecbugs_scan(src, reports_dir, convert, repo_context)
+    pmd_scan(src, reports_dir, convert, repo_context)
 
 
 def csharp_scan(src, reports_dir, convert, repo_context):
@@ -407,12 +395,9 @@ def csharp_scan(src, reports_dir, convert, repo_context):
       convert Boolean to enable normalisation of reports json
       repo_context Repo context
     """
-    if inspect.is_authenticated():
-        inspect.inspect_scan("csharp", src, reports_dir, convert, repo_context)
-    else:
-        LOG.info(
-            "Scanning C# and .Net core projects is only possible with ShiftLeft NG SAST. To enable visit https://www.shiftleft.io/register to signup and pass the tokens as environment variables!"
-        )
+    LOG.info(
+        "Scanning C# and .Net core projects is only possible with ShiftLeft NG SAST. To enable visit https://www.shiftleft.io/register to signup and pass the tokens as environment variables!"
+    )
 
 
 def pmd_scan(src, reports_dir, convert, repo_context):
@@ -539,10 +524,10 @@ def nodejs_scan(src, reports_dir, convert, repo_context):
       convert Boolean to enable normalisation of reports json
       repo_context Repo context
     """
-    if inspect.is_authenticated():
-        inspect.inspect_scan("js", src, reports_dir, convert, repo_context)
-    else:
-        sec_scan(src, reports_dir, convert, repo_context)
+    LOG.info(
+        "Scanning JavaScript projects is currently not possible with rosa."
+    )
+
 
 
 def ts_scan(src, reports_dir, convert, repo_context):
@@ -555,53 +540,9 @@ def ts_scan(src, reports_dir, convert, repo_context):
       convert Boolean to enable normalisation of reports json
       repo_context Repo context
     """
-    if inspect.is_authenticated():
-        inspect.inspect_scan("ts", src, reports_dir, convert, repo_context)
-    else:
-        LOG.info(
-            "Scanning TypeScript projects is only possible with ShiftLeft NG SAST. To enable visit https://www.shiftleft.io/register to signup and pass the tokens as environment variables!"
-        )
-
-
-def sec_scan(src, reports_dir, convert, repo_context):
-    """
-    Method to initiate Nodejs sec scan of the node.js codebase
-
-    Args:
-      src Project dir
-      reports_dir Directory for output reports
-      convert Boolean to enable normalisation of reports json
-      repo_context Repo context
-    """
-    if not utils.check_command("njsscan"):
-        return
-    convert_args = []
-    report_fname = utils.get_report_file("source-js", reports_dir, convert)
-    if reports_dir or convert:
-        convert_args = [
-            "--json",
-            "--output",
-            report_fname,
-        ]
-    sec_cmd = "njsscan"
-    sec_args = [sec_cmd, *convert_args]
-    js_files = utils.find_files(src, ".js")
-    vue_files = utils.find_files(src, ".vue")
-    sec_args += js_files
-    if vue_files:
-        sec_args += vue_files
-    exec_tool("source-js", sec_args, src)
-    if convert:
-        crep_fname = utils.get_report_file(
-            "source-js", reports_dir, convert, ext_name="sarif"
-        )
-        convertLib.convert_file(
-            "source-js",
-            sec_args[1:],
-            src,
-            report_fname,
-            crep_fname,
-        )
+    LOG.info(
+        "Scanning TypeScript projects is currently not possible with rosa."
+    )
 
 
 def bomgen(src, reports_dir, convert, repo_context):
@@ -719,13 +660,7 @@ def main():
     # Should we skip this scan
     if should_skip(src_dir, reports_dir, repo_context, scan_mode):
         sys.exit(0)
-    # Check if we should authenticate with inspect
-    if not args.nocloud:
-        inspect.authenticate()
-    if inspect.is_authenticated():
-        console.print(ngsast_logo, style="info")
-    else:
-        console.print(product_logo, style="info")
+    console.print(product_logo, style="info")
     LOG.info("Scanning {} using plugins {}".format(src_dir, type))
     if args.auto_build or config.get("scan_auto_build"):
         build_res = auto_build(type, src_dir, reports_dir)

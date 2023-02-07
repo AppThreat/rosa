@@ -31,8 +31,6 @@ credscan_timeout = "2m"
 
 # Php memory limit
 php_memory_limit = "2G"
-phpstan_level = "5"
-phpstan_config = os.path.join(TOOLS_CONFIG_DIR, "phpstan.neon.dist")
 
 # Kotlint detekt config
 detekt_config = os.path.join(TOOLS_CONFIG_DIR, "detekt-config.yml")
@@ -87,7 +85,6 @@ PR_COMMENT_BASIC_TEMPLATE = """## Scan Summary
 Supported language scan types. Unused as a variable
 """
 scan_types = [
-    "ansible",
     "apex",
     "aws",
     "bash",
@@ -270,12 +267,6 @@ def set(configName, value):
 Mapping for application types to scan tools for projects requiring just a single tool
 """
 scan_tools_args_map = {
-    "ansible": [
-        "ansible-lint",
-        *["--exclude " + d for d in ignore_directories],
-        "--parseable-severity",
-        "*.yml",
-    ],
     "apex": {
         "source-apex": [
             *get("PMD_CMD").split(" "),
@@ -571,34 +562,7 @@ scan_tools_args_map = {
         ]
     },
     "php-ide": {
-        "source-php": [
-            "phpstan",
-            "analyse",
-            "-c",
-            get("phpstan_config"),
-            "-l",
-            get("phpstan_level"),
-            "--no-progress",
-            "--memory-limit",
-            get("php_memory_limit"),
-            "--error-format=json",
-            "%(src)s",
-        ],
         "audit-init": ["psalm", "--init", "--root=%(src)s", ".", "1"],
-        "audit-php": [
-            "psalm",
-            "--report-show-info=false",
-            "--show-snippet=true",
-            "--find-dead-code=always",
-            "--find-unused-code=always",
-            "-m",
-            "--no-progress",
-            "--no-file-cache",
-            "--no-suggestions",
-            "--no-cache",
-            "--root=%(src)s",
-            "--report=" + "%(report_fname_prefix)s.json",
-        ],
         "taint-php": [
             "/opt/phpsast/vendor/bin/psalm",
             "--report-show-info=false",
@@ -615,20 +579,6 @@ scan_tools_args_map = {
     },
     "php": {
         "audit-init": ["psalm", "--init", "--root=%(src)s", ".", "1"],
-        "audit-php": [
-            "psalm",
-            "--report-show-info=false",
-            "--show-snippet=true",
-            "--find-dead-code=always",
-            "--find-unused-code=always",
-            "-m",
-            "--no-progress",
-            "--no-file-cache",
-            "--no-suggestions",
-            "--no-cache",
-            "--root=%(src)s",
-            "--report=" + "%(report_fname_prefix)s.json",
-        ],
         "taint-php": [
             "/opt/phpsast/vendor/bin/psalm",
             "--report-show-info=false",
@@ -782,21 +732,6 @@ scan_tools_args_map = {
             "-s",
             "--framework",
             "serverless",
-            "--quiet",
-            "--skip-download",
-            "-o",
-            "json",
-            "-d",
-            "%(src)s",
-        ],
-    },
-    "yaml": {
-        "yamllint": ["yamllint", "-f", "parsable", "(filelist=yaml)"],
-        "source-yaml": [
-            "checkov",
-            "-s",
-            "--framework",
-            "kubernetes",
             "--quiet",
             "--skip-download",
             "-o",
