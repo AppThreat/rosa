@@ -10,7 +10,7 @@ def test_find_repo():
     assert len(repo_details.keys()) > 1
     assert (
         repo_details["repositoryUri"]
-        == "https://github.com/ShiftLeftSecurity/sast-scan"
+        == "https://github.com/AppThreat/rosa"
     )
 
 

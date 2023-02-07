@@ -25,7 +25,6 @@ from urllib.parse import quote_plus
 
 import sarif_om as om
 from jschema_to_python.to_json import to_json
-from reporter.sarif import render_html
 
 import lib.cis as cis
 import lib.config as config
@@ -529,16 +528,13 @@ def report(
     serialized_log = to_json(log)
 
     if crep_fname:
-        html_file = crep_fname.replace(".sarif", ".html")
         with io.open(crep_fname, "w") as fileobj:
             fileobj.write(serialized_log)
         if tool_name != "empty-scan":
-            render_html(json.loads(serialized_log), html_file)
             if fileobj.name != sys.stdout.name:
                 LOG.debug(
-                    "SARIF and HTML report written to file: %s, %s :thumbsup:",
+                    "SARIF report written to file: %s, %s :thumbsup:",
                     fileobj.name,
-                    html_file,
                 )
     return serialized_log
 
