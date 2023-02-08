@@ -4,7 +4,7 @@ import os
 import tempfile
 from pathlib import Path
 
-import lib.aggregate as aggregate
+import rosa.lib.aggregate as aggregate
 
 
 def find_test_data():

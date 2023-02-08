@@ -14,7 +14,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "very-high"
@@ -39,7 +39,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "very-high"
@@ -64,7 +64,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "very-high"
@@ -89,7 +89,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "very-high"
@@ -114,7 +114,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "very-high"
@@ -139,7 +139,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "very-high"
@@ -161,7 +161,7 @@
       "conversion": {
         "tool": {
           "driver": {
-            "name": "@ShiftLeft/sast-scan"
+            "name": "@AppThreat/rosa"
           }
         },
         "invocation": {
@@ -923,7 +923,7 @@
       ],
       "automationDetails": {
         "description": {
-          "text": "Static Analysis Security Test results using @ShiftLeft/sast-scan"
+          "text": "Static Analysis Security Test results using @AppThreat/rosa"
         },
         "guid": "0eb02acb-acac-417f-a30b-05f553e1cdfc"
       },

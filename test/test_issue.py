@@ -1,6 +1,6 @@
 import os
 
-from lib.issue import Issue
+from rosa.lib.issue import Issue
 
 
 def test_get_code():

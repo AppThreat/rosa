@@ -74,9 +74,7 @@ RUN curl -L "https://github.com/detekt/detekt/releases/download/v${DETEKT_VERSIO
     && curl -LO "https://repo1.maven.org/maven2/com/h3xstream/findsecbugs/findsecbugs-plugin/${FSB_VERSION}/findsecbugs-plugin-${FSB_VERSION}.jar" \
     && mv findsecbugs-plugin-${FSB_VERSION}.jar /opt/spotbugs-${SB_VERSION}/plugin/findsecbugs-plugin.jar \
     && curl -LO "https://repo1.maven.org/maven2/com/mebigfatguy/sb-contrib/sb-contrib/${SB_CONTRIB_VERSION}/sb-contrib-${SB_CONTRIB_VERSION}.jar" \
-    && mv sb-contrib-${SB_CONTRIB_VERSION}.jar /opt/spotbugs-${SB_VERSION}/plugin/sb-contrib.jar \
-    && curl "https://cdn.shiftleft.io/download/sl" > /usr/local/bin/appthreat/sl \
-    && chmod a+rx /usr/local/bin/appthreat/sl
+    && mv sb-contrib-${SB_CONTRIB_VERSION}.jar /opt/spotbugs-${SB_VERSION}/plugin/sb-contrib.jar
 
 FROM almalinux/9-minimal:latest
 
@@ -92,7 +90,7 @@ LABEL maintainer="appthreat" \
       org.opencontainers.docker.cmd="docker run --rm -v $(pwd):/app:rw -t ghcr.io/appthreat/rosa rosa --build"
 
 ENV APP_SRC_DIR=/usr/local/src \
-    DEPSCAN_CMD="/usr/local/bin/depscan" \
+    DEPSCAN_CMD="/usr/bin/depscan" \
     PMD_CMD="/opt/pmd-bin/bin/run.sh pmd" \
     PMD_JAVA_OPTS="--enable-preview" \
     SB_VERSION=4.7.3 \
@@ -113,7 +111,7 @@ ENV APP_SRC_DIR=/usr/local/src \
     GOOS=linux \
     CGO_ENABLED=0 \
     NVD_EXCLUDE_TYPES="o,h" \
-    PATH=/usr/local/src/:${PATH}:/opt/gradle/bin:/usr/local/go/bin:/opt/sl-cli:/opt/phpsast/vendor/bin:
+    PATH=/usr/local/src/:${PATH}:/opt/gradle/bin:/usr/local/go/bin:/opt/phpsast/vendor/bin:
 
 COPY --from=builder /usr/local/bin/appthreat /usr/local/bin
 COPY --from=builder /opt/pmd-bin-${PMD_VERSION} /opt/pmd-bin
@@ -139,12 +137,12 @@ RUN echo -e "[nodejs]\nname=nodejs\nstream=19\nprofiles=\nstate=enabled\n" > /et
     && pip3 install --no-cache-dir poetry \
     && poetry config virtualenvs.create false \
     && cd /usr/local/src/ && poetry install --no-cache --without dev \
-    && npm install --no-audit --progress=false --only=production -g @cyclonedx/cdxgen @microsoft/rush --unsafe-perm \
-    && mkdir -p /opt/sl-cli /opt/phpsast && cd /opt/phpsast && composer require --quiet --no-cache --dev vimeo/psalm \
+    && npm install --no-audit --progress=false --omit=dev -g @cyclonedx/cdxgen @microsoft/rush --unsafe-perm \
+    && mkdir -p /opt/phpsast && cd /opt/phpsast && composer require --quiet --no-cache --dev vimeo/psalm \
     && rm -rf /var/cache/yum \
     && microdnf remove -y python3-devel php-fpm php-devel php-pear automake make gcc gcc-c++ libtool \
     && microdnf clean all
 
 WORKDIR /app
 
-CMD [ "python3", "/usr/local/src/scan" ]
+CMD [ "rosa" ]

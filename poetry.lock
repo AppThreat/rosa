@@ -164,7 +164,7 @@ word-list = ["pyahocorasick"]
 
 [[package]]
 name = "bc-jsonpath-ng"
-version = "1.5.8"
+version = "1.5.9"
 description = "A final implementation of JSONPath for Python that aims to be standard compliant, including arithmetic and binary comparison operators and providing clear AST for metaprogramming."
 category = "main"
 optional = false
@@ -226,14 +226,14 @@ uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "boto3"
-version = "1.26.65"
+version = "1.26.67"
 description = "The AWS SDK for Python"
 category = "main"
 optional = false
 python-versions = ">= 3.7"
 
 [package.dependencies]
-botocore = ">=1.29.65,<1.30.0"
+botocore = ">=1.29.67,<1.30.0"
 jmespath = ">=0.7.1,<2.0.0"
 s3transfer = ">=0.6.0,<0.7.0"
 
@@ -242,7 +242,7 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "botocore"
-version = "1.29.65"
+version = "1.29.67"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
@@ -309,7 +309,7 @@ python-versions = "*"
 
 [[package]]
 name = "checkov"
-version = "2.2.341"
+version = "2.2.356"
 description = "Infrastructure as code static analysis"
 category = "main"
 optional = false
@@ -321,7 +321,7 @@ aiohttp = "*"
 aiomultiprocess = "*"
 argcomplete = "*"
 bc-detect-secrets = "1.4.9"
-bc-jsonpath-ng = "1.5.8"
+bc-jsonpath-ng = "1.5.9"
 bc-python-hcl2 = "0.3.51"
 boto3 = ">=1.17"
 cachetools = "*"
@@ -1665,8 +1665,8 @@ bc-detect-secrets = [
     {file = "bc_detect_secrets-1.4.9-py3-none-any.whl", hash = "sha256:68a3c4fb8608935d9e2bee78e0cae25282ba69c039cde4e19e5207b343cc03fb"},
 ]
 bc-jsonpath-ng = [
-    {file = "bc-jsonpath-ng-1.5.8.tar.gz", hash = "sha256:c79388a3bfd00b52d8dd6cd600b637c377c9fca22faa7d30bbbc38cca9b06ee2"},
-    {file = "bc_jsonpath_ng-1.5.8-py3-none-any.whl", hash = "sha256:f9ead127f02cbae3fec7442d2e2eae8e104b3362f872f9d687991b74831ec2b9"},
+    {file = "bc-jsonpath-ng-1.5.9.tar.gz", hash = "sha256:5e72d78887521469f8a52966f6f0664ec3d59dcb2cebf85b8131867a241c84ec"},
+    {file = "bc_jsonpath_ng-1.5.9-py3-none-any.whl", hash = "sha256:51c3ba65884654ec7be91288b23e1b65bd0b5188acdc51bc80ecfc365a54b77c"},
 ]
 bc-python-hcl2 = [
     {file = "bc-python-hcl2-0.3.51.tar.gz", hash = "sha256:15bfecbae882ead998dd9300737237a14e40dfd8c973e5c7de7b4c92040a010f"},
@@ -1704,12 +1704,12 @@ black = [
     {file = "black-23.1.0.tar.gz", hash = "sha256:b0bd97bea8903f5a2ba7219257a44e3f1f9d00073d6cc1add68f0beec69692ac"},
 ]
 boto3 = [
-    {file = "boto3-1.26.65-py3-none-any.whl", hash = "sha256:9e23ec51e1fe162ecb5efee41bd9346d90ebbb8ff094ef8088223305d48ffaec"},
-    {file = "boto3-1.26.65.tar.gz", hash = "sha256:9fc94b3078f5047c1fc40529fa12eb82a2432bb1dca0ee37b1c54f902f46191f"},
+    {file = "boto3-1.26.67-py3-none-any.whl", hash = "sha256:159ab54ab301a213aea0dbebfe97c12909fd9180110a2b78aaa712c2d7d1a929"},
+    {file = "boto3-1.26.67.tar.gz", hash = "sha256:c2e21ac64370fee1f3dccd97b4767e89d046c45c00faec27c36405618e34c7e5"},
 ]
 botocore = [
-    {file = "botocore-1.29.65-py3-none-any.whl", hash = "sha256:f566a9aa1b477cd1bdedb8f694f99fc257240eacdd7a73cc7d19d43cb20870b9"},
-    {file = "botocore-1.29.65.tar.gz", hash = "sha256:6b7ae2dee621cb863935461ba4b8aa32420e945f5b7d94bb2852b79f90b9f8de"},
+    {file = "botocore-1.29.67-py3-none-any.whl", hash = "sha256:424c5fa21913d85ea990928acf35622a4f2b7f0750133b96adaa8c642bb6a878"},
+    {file = "botocore-1.29.67.tar.gz", hash = "sha256:0ccec4a906b6b8c7bb6bc5226509059ee9ed94d3cf1014487ef5b8e56801e6a3"},
 ]
 cached-property = [
     {file = "cached-property-1.5.2.tar.gz", hash = "sha256:9fa5755838eecbb2d234c3aa390bd80fbd3ac6b6869109bfc1b499f7bd89a130"},
@@ -1884,8 +1884,8 @@ charset-normalizer = [
     {file = "charset_normalizer-3.0.1-py3-none-any.whl", hash = "sha256:7e189e2e1d3ed2f4aebabd2d5b0f931e883676e51c7624826e0a4e5fe8a0bf24"},
 ]
 checkov = [
-    {file = "checkov-2.2.341-py3-none-any.whl", hash = "sha256:1d8e1b34991ac42e8001e2277d1f796cdfb1c8000da1d205345c36578c554a53"},
-    {file = "checkov-2.2.341.tar.gz", hash = "sha256:d1afd6880f3106d7f05de800a142c6f6dba996bf9b935b6928902c2cef1bd98c"},
+    {file = "checkov-2.2.356-py3-none-any.whl", hash = "sha256:12e3a6dd420a5c2da850c11206527a51727635235303c41a2a27da1332390177"},
+    {file = "checkov-2.2.356.tar.gz", hash = "sha256:ab2d5a4f70f62c0a1c610adf44c25375acbcad64e534241e7639186844caa43e"},
 ]
 click = [
     {file = "click-8.1.3-py3-none-any.whl", hash = "sha256:bb4d8133cb15a609f44e8213d9b391b0809795062913b383c62be0ee95b1db48"},

@@ -5,8 +5,8 @@ import tempfile
 import uuid
 from pathlib import Path
 
-import lib.convert as convertLib
-import lib.issue as issueLib
+import rosa.lib.convert as convertLib
+import rosa.lib.issue as issueLib
 
 
 def test_nodejsscan_convert_empty():
@@ -15,7 +15,7 @@ def test_nodejsscan_convert_empty():
         jsondata = json.loads(data)
         assert (
             jsondata["runs"][0]["automationDetails"]["description"]["text"]
-            == "Static Analysis Security Test results using @ShiftLeft/sast-scan"
+            == "Static Analysis Security Test results using @AppThreat/rosa"
         )
         assert uuid.UUID(jsondata["inlineExternalProperties"][0]["guid"]).version == 4
         assert not jsondata["runs"][0]["results"]
@@ -106,12 +106,12 @@ def test_create_result():
         == "file:///foo/bar/CWE-916/examples/InsufficientPasswordHash.js"
     )
     # Override the workspace and check the location
-    os.environ["WORKSPACE"] = "https://github.com/ShiftLeftSecurity/cdxgen/blob/master"
+    os.environ["WORKSPACE"] = "https://github.com/AppThreat/cdxgen/blob/master"
     importlib.reload(convertLib)
     data = convertLib.create_result("nodetest", issue, {}, {}, None, "/app/src")
     assert (
         data.locations[0].physical_location.artifact_location.uri
-        == "https://github.com/ShiftLeftSecurity/cdxgen/blob/master/CWE-916/examples/InsufficientPasswordHash.js"
+        == "https://github.com/AppThreat/cdxgen/blob/master/CWE-916/examples/InsufficientPasswordHash.js"
     )
 
 
@@ -126,8 +126,8 @@ def test_create_result_relative():
             "repo": "app",
             "rule": "Generic Credential",
             "commitMessage": "Add secret\n",
-            "author": "Team ShiftLeft",
-            "email": "hello@shiftleft.io",
+            "author": "Team AppThreat",
+            "email": "hello@AppThreat.io",
             "file": "src/main/README-new.md",
             "date": "2020-01-12T19:45:43Z",
             "tags": "key, API, generic",
@@ -194,7 +194,7 @@ def test_credscan_convert_unc():
                     "commitMessage": "***STAGED CHANGES***",
                     "author": "",
                     "email": "",
-                    "file": "/Users/guest/work/ShiftLeft/HelloShiftLeft/README.md",
+                    "file": "/Users/guest/work/AppThreat/HelloAppThreat/README.md",
                     "date": "1970-01-01T00:00:00Z",
                     "tags": "key, AWS",
                 }
@@ -404,8 +404,8 @@ def test_staticcheck_convert_issue():
 
 
 def test_to_uri():
-    p = convertLib.to_uri("https://github.com/shiftleft/sast-scan")
-    assert p == "https://github.com/shiftleft/sast-scan"
+    p = convertLib.to_uri("https://github.com/AppThreat/sast-scan")
+    assert p == "https://github.com/AppThreat/sast-scan"
     p = convertLib.to_uri("README.md")
     assert p == "README.md"
     p = convertLib.to_uri("/home/guest/work/README.md")
@@ -426,7 +426,7 @@ def test_inspect_convert_issue():
             {},
             [
                 {
-                    "applicationId": "HelloShiftLeft",
+                    "applicationId": "HelloAppThreat",
                     "vulnerability": {
                         "firstDetected": "1587134045",
                         "vulnerabilityId": "command-injection-attacker-controlled/b9790fedb5c49bf0c10a7cf72b0a5eab",
@@ -436,18 +436,18 @@ def test_inspect_convert_issue():
                         "score": 9,
                         "severity": "SEVERITY_HIGH_IMPACT",
                         "dataFlow": {
-                            "spId": "sl/49089d37-68ff-47e3-9035-269e6e91a44d/HelloShiftLeft/86ad7190555ddb774563ac58d242919db87a0265/56f81248989870704c18042cc58d9ff18573e7aff5f1a8cb2a92f022556a20be/1",
+                            "spId": "sl/49089d37-68ff-47e3-9035-269e6e91a44d/HelloAppThreat/86ad7190555ddb774563ac58d242919db87a0265/56f81248989870704c18042cc58d9ff18573e7aff5f1a8cb2a92f022556a20be/1",
                             "occurrenceHash": "b9790fedb5c49bf0c10a7cf72b0a5eab",
                             "dataFlow": {
                                 "list": [
                                     {
                                         "location": {
                                             "lineNumber": 21,
-                                            "packageName": "io.shiftleft.controller",
-                                            "className": "io.shiftleft.controller.SearchController",
-                                            "methodName": "io.shiftleft.controller.SearchController.doGetSearch:java.lang.String(java.lang.String,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)",
+                                            "packageName": "io.AppThreat.controller",
+                                            "className": "io.AppThreat.controller.SearchController",
+                                            "methodName": "io.AppThreat.controller.SearchController.doGetSearch:java.lang.String(java.lang.String,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)",
                                             "shortMethodName": "doGetSearch",
-                                            "fileName": "io/shiftleft/controller/SearchController.java",
+                                            "fileName": "io/AppThreat/controller/SearchController.java",
                                         },
                                         "variableInfo": {
                                             "parameter": {
@@ -479,11 +479,11 @@ def test_inspect_convert_issue():
                                     {
                                         "location": {
                                             "lineNumber": 25,
-                                            "packageName": "io.shiftleft.controller",
-                                            "className": "io.shiftleft.controller.SearchController",
-                                            "methodName": "io.shiftleft.controller.SearchController.doGetSearch:java.lang.String(java.lang.String,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)",
+                                            "packageName": "io.AppThreat.controller",
+                                            "className": "io.AppThreat.controller.SearchController",
+                                            "methodName": "io.AppThreat.controller.SearchController.doGetSearch:java.lang.String(java.lang.String,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)",
                                             "shortMethodName": "doGetSearch",
-                                            "fileName": "io/shiftleft/controller/SearchController.java",
+                                            "fileName": "io/AppThreat/controller/SearchController.java",
                                         },
                                         "variableInfo": {
                                             "local": {
@@ -562,7 +562,7 @@ def test_inspect_extract_issue():
         "score": 9,
         "severity": "SEVERITY_HIGH_IMPACT",
         "line_number": 21,
-        "filename": "io/shiftleft/controller/SearchController.java",
+        "filename": "io/AppThreat/controller/SearchController.java",
         "first_found": "86ad7190555ddb774563ac58d242919db87a0265",
         "issue_confidence": "HIGH",
     }
@@ -739,11 +739,11 @@ def test_convert_dataflow():
             {
                 "location": {
                     "lineNumber": 21,
-                    "packageName": "io.shiftleft.controller",
-                    "className": "io.shiftleft.controller.SearchController",
-                    "methodName": "io.shiftleft.controller.SearchController.doGetSearch:java.lang.String(java.lang.String,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)",
+                    "packageName": "io.AppThreat.controller",
+                    "className": "io.AppThreat.controller.SearchController",
+                    "methodName": "io.AppThreat.controller.SearchController.doGetSearch:java.lang.String(java.lang.String,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)",
                     "shortMethodName": "doGetSearch",
-                    "fileName": "io/shiftleft/controller/SearchController.java",
+                    "fileName": "io/AppThreat/controller/SearchController.java",
                 },
                 "variableInfo": {
                     "parameter": {
@@ -769,11 +769,11 @@ def test_convert_dataflow():
             {
                 "location": {
                     "lineNumber": 25,
-                    "packageName": "io.shiftleft.controller",
-                    "className": "io.shiftleft.controller.SearchController",
-                    "methodName": "io.shiftleft.controller.SearchController.doGetSearch:java.lang.String(java.lang.String,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)",
+                    "packageName": "io.AppThreat.controller",
+                    "className": "io.AppThreat.controller.SearchController",
+                    "methodName": "io.AppThreat.controller.SearchController.doGetSearch:java.lang.String(java.lang.String,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)",
                     "shortMethodName": "doGetSearch",
-                    "fileName": "io/shiftleft/controller/SearchController.java",
+                    "fileName": "io/AppThreat/controller/SearchController.java",
                 },
                 "variableInfo": {
                     "local": {"symbol": "foo", "type": "java.lang.String"}

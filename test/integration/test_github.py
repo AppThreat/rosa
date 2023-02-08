@@ -1,4 +1,4 @@
-from lib.integration import github
+from rosa.lib.integration import github
 
 
 def test_context():

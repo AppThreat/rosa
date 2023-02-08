@@ -1,6 +1,6 @@
 import os
 
-import lib.config as config
+import rosa.lib.config as config
 
 
 def test_scan_tools_map():

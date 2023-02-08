@@ -1,4 +1,4 @@
-import lib.utils as utils
+import rosa.lib.utils as utils
 
 
 def test_get_workspace():
@@ -10,21 +10,21 @@ def test_get_workspace():
     assert not d
     d = utils.get_workspace(
         {
-            "repositoryUri": "https://gitlab.com/prabhu3/helloshiftleft",
+            "repositoryUri": "https://gitlab.com/prabhu3/helloAppThreat",
             "branch": "develop",
         }
     )
-    assert d == "https://gitlab.com/prabhu3/helloshiftleft/-/blob/develop"
+    assert d == "https://gitlab.com/prabhu3/helloAppThreat/-/blob/develop"
     d = utils.get_workspace(
         {
-            "repositoryUri": "https://gitlab.com/prabhu3/helloshiftleft",
+            "repositoryUri": "https://gitlab.com/prabhu3/helloAppThreat",
             "branch": "",
             "revisionId": "fd302c3938a3c58908839ceaf48c2ce8176353f0",
         }
     )
     assert (
         d
-        == "https://gitlab.com/prabhu3/helloshiftleft/-/blob/fd302c3938a3c58908839ceaf48c2ce8176353f0"
+        == "https://gitlab.com/prabhu3/helloAppThreat/-/blob/fd302c3938a3c58908839ceaf48c2ce8176353f0"
     )
     d = utils.get_workspace(
         {

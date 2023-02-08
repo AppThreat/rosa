@@ -1,4 +1,4 @@
-from lib.cis import get_cis_rules, get_rule
+from rosa.lib.cis import get_cis_rules, get_rule
 
 
 def test_k8s_all():

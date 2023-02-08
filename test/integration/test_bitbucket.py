@@ -1,6 +1,6 @@
 import os
 
-from lib.integration import bitbucket
+from rosa.lib.integration import bitbucket
 
 
 def test_context():
@@ -20,7 +20,7 @@ def test_reports_url():
     )
     assert (
         url
-        == "http://api.bitbucket.org/2.0/repositories/test/bar/commit/123/reports/shiftleft-scan"
+        == "http://api.bitbucket.org/2.0/repositories/test/bar/commit/123/reports/rosa"
     )
 
 

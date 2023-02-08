@@ -8,7 +8,7 @@
             {
               "id": "",
               "name": "Password Hardcoded",
-              "helpUri": "https://stackoverflow.com/search?q=shiftleft/sast-scan+nodejsscan++Password Hardcoded"
+              "helpUri": "https://stackoverflow.com/search?q=AppThreat/sast-scan+nodejsscan++Password Hardcoded"
             }
           ]
         }
@@ -16,7 +16,7 @@
       "conversion": {
         "tool": {
           "driver": {
-            "name": "@ShiftLeft/sast-scan"
+            "name": "@AppThreat/rosa"
           }
         },
         "invocation": {

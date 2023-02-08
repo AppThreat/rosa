@@ -3,7 +3,7 @@ import os
 import tempfile
 from pathlib import Path
 
-import lib.analysis as analysis
+import rosa.lib.analysis as analysis
 
 
 def find_test_data():

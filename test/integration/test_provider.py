@@ -1,4 +1,4 @@
-from lib.integration import bitbucket, gitlab, provider
+from rosa.lib.integration import bitbucket, gitlab, provider
 
 
 def test_get():

@@ -1,5 +1,5 @@
-import lib.pyt.vulnerabilities.insights as insights
-from lib.pyt.core.ast_helper import generate_ast_from_code
+import rosa.lib.pyt.vulnerabilities.insights as insights
+from rosa.lib.pyt.core.ast_helper import generate_ast_from_code
 
 
 def test_pymongo_insights():

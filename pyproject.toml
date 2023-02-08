@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "rosa"
-version = "0.1.0"
+version = "3.0.0"
 description = "Risk Oriented Security Analysis tool from AppThreat"
 authors = ["Team AppThreat <cloud@appthreat.com>"]
 license = "GPL-3.0-or-later"
 readme = "README.md"
-packages = [{include = "lib"}]
+packages = [{include = "rosa"}]
 homepage = "https://github.com/AppThreat/rosa"
 repository = "https://github.com/AppThreat/rosa"
 keywords = ["rosa", "sast", "sca", "sbom", "code analysis", "static analysis"]
@@ -23,7 +23,7 @@ classifiers = [
 exclude = ["contrib", "test"]
 
 [tool.poetry.scripts]
-scan = 'scan:main'
+rosa = 'rosa.cli:main'
 
 [tool.poetry.dependencies]
 python = ">=3.8.1,<3.11"

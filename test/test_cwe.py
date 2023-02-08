@@ -1,4 +1,4 @@
-from lib.cwe import get, get_description
+from rosa.lib.cwe import get, get_description
 
 
 def test_cwe_get():

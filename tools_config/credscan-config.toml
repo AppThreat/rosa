@@ -210,10 +210,10 @@ title = "gitleaks config"
 	tags = ["key", "API", "generic"]
 
 [[rules]]
-	description = "ShiftLeft token"
+	description = "AppThreat token"
 	regex = '''.'''
-	file = '''shiftleft\.json'''
-	tags = ["file", "ShiftLeft"]
+	file = '''AppThreat\.json'''
+	tags = ["file", "AppThreat"]
 
 [[rules]]
 	description = "Shell history"

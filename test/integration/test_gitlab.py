@@ -1,6 +1,6 @@
 import os
 
-from lib.integration import gitlab
+from rosa.lib.integration import gitlab
 
 
 def test_context():

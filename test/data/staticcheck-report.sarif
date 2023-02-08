@@ -14,7 +14,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -39,7 +39,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -64,7 +64,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -89,7 +89,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -114,7 +114,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -139,7 +139,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -164,7 +164,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -189,7 +189,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -214,7 +214,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -239,7 +239,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -264,7 +264,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -289,7 +289,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -314,7 +314,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -339,7 +339,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -364,7 +364,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -389,7 +389,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -414,7 +414,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -439,7 +439,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -464,7 +464,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -489,7 +489,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -514,7 +514,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -539,7 +539,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -564,7 +564,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -589,7 +589,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -614,7 +614,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -639,7 +639,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -664,7 +664,7 @@
               "name": "",
               "properties": {
                 "tags": [
-                  "ShiftLeft",
+                  "AppThreat",
                   "Scan"
                 ],
                 "precision": "high"
@@ -686,7 +686,7 @@
       "conversion": {
         "tool": {
           "driver": {
-            "name": "@ShiftLeft/sast-scan"
+            "name": "@AppThreat/rosa"
           }
         },
         "invocation": {
@@ -5225,7 +5225,7 @@
       ],
       "automationDetails": {
         "description": {
-          "text": "Static Analysis Security Test results using @ShiftLeft/sast-scan"
+          "text": "Static Analysis Security Test results using @AppThreat/rosa"
         },
         "guid": "d38dea97-2fb4-4f88-86b4-355dfb1c791f"
       },

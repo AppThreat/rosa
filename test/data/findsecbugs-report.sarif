@@ -23,7 +23,7 @@
             {
               "id": "SPRING_FILE_DISCLOSURE",
               "name": "Spring File Disclosure",
-              "helpUri": "https://stackoverflow.com/search?q=shiftleft/sast-scan+findsecbugs+SPRING_FILE_DISCLOSURE+Spring File Disclosure"
+              "helpUri": "https://stackoverflow.com/search?q=AppThreat/sast-scan+findsecbugs+SPRING_FILE_DISCLOSURE+Spring File Disclosure"
             },
             {
               "id": "CWE-22",
@@ -68,7 +68,7 @@
             {
               "id": "HTTPONLY_COOKIE",
               "name": "Cookie without the HttpOnly flag",
-              "helpUri": "https://stackoverflow.com/search?q=shiftleft/sast-scan+findsecbugs+HTTPONLY_COOKIE+Cookie without the HttpOnly flag"
+              "helpUri": "https://stackoverflow.com/search?q=AppThreat/sast-scan+findsecbugs+HTTPONLY_COOKIE+Cookie without the HttpOnly flag"
             },
             {
               "id": "CWE-614",
@@ -101,7 +101,7 @@
       "conversion": {
         "tool": {
           "driver": {
-            "name": "@ShiftLeft/sast-scan"
+            "name": "@AppThreat/rosa"
           }
         },
         "invocation": {
@@ -3025,14 +3025,14 @@
       ],
       "automationDetails": {
         "description": {
-          "text": "Static Analysis Security Test results using @ShiftLeft/sast-scan"
+          "text": "Static Analysis Security Test results using @AppThreat/rosa"
         },
         "guid": "b16a7480-f6b3-4275-8e5a-af96bb538aba"
       },
       "versionControlProvenance": [
         {
           "branch": "develop",
-          "repositoryUri": "https://github.com/ShiftLeftSecurity/WebGoat",
+          "repositoryUri": "https://github.com/AppThreat/WebGoat",
           "revisionId": "08038b71884c156dd35d834ad3920e9a1f7bcfa6"
         }
       ]

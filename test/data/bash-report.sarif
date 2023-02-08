@@ -61,7 +61,7 @@
       "conversion": {
         "tool": {
           "driver": {
-            "name": "@ShiftLeft/sast-scan"
+            "name": "@AppThreat/rosa"
           }
         },
         "invocation": {

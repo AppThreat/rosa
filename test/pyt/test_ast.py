@@ -1,4 +1,4 @@
-from lib.pyt.core.ast_helper import generate_ast_from_code, has_import_like
+from rosa.lib.pyt.core.ast_helper import generate_ast_from_code, has_import_like
 
 
 def test_ast_imports():

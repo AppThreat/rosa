@@ -1,16 +1,17 @@
 import os
 
-from lib.pyt.analysis.constraint_table import initialize_constraint_table
-from lib.pyt.analysis.fixed_point import analyse
-from lib.pyt.cfg import make_cfg
-from lib.pyt.core.ast_helper import generate_ast_from_code
-from lib.pyt.vulnerabilities import find_vulnerabilities
-from lib.pyt.web_frameworks import FrameworkAdaptor, is_taintable_function
+from rosa.lib.pyt.analysis.constraint_table import initialize_constraint_table
+from rosa.lib.pyt.analysis.fixed_point import analyse
+from rosa.lib.pyt.cfg import make_cfg
+from rosa.lib.pyt.core.ast_helper import generate_ast_from_code
+from rosa.lib.pyt.vulnerabilities import find_vulnerabilities
+from rosa.lib.pyt.web_frameworks import FrameworkAdaptor, is_taintable_function
 
 default_blackbox_mapping_file = os.path.join(
     os.path.dirname(__file__),
     "..",
     "..",
+    "rosa",
     "lib",
     "pyt",
     "vulnerability_definitions",
@@ -22,6 +23,7 @@ default_trigger_word_file = os.path.join(
     os.path.dirname(__file__),
     "..",
     "..",
+    "rosa",
     "lib",
     "pyt",
     "vulnerability_definitions",
