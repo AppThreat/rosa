@@ -1,8 +1,5 @@
 FROM almalinux/9-minimal:latest as builder
 
-ARG CLI_VERSION
-ARG BUILD_DATE
-
 ENV GOSEC_VERSION=2.14.0 \
     TFSEC_VERSION=0.63.1 \
     KUBESEC_VERSION=2.11.4 \
@@ -27,7 +24,7 @@ USER root
 
 RUN microdnf install -y make \
         findutils tar shadow-utils unzip zip sudo xz wget which unzip \
-        nodejs npm java-11-openjdk-headless libsecret \
+        nodejs npm java-17-openjdk-headless libsecret \
     && curl -LO "https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz" \
     && tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz \
     && rm go${GO_VERSION}.linux-amd64.tar.gz \
@@ -124,7 +121,7 @@ USER root
 RUN echo -e "[nodejs]\nname=nodejs\nstream=19\nprofiles=\nstate=enabled\n" > /etc/dnf/modules.d/nodejs.module \
     && microdnf install -y php php-curl php-zip php-bcmath php-json php-pear php-mbstring php-devel make gcc \
       findutils tar shadow-utils unzip zip sudo xz wget which maven \
-      nodejs git-core java-11-openjdk-headless python3 python3-devel \
+      nodejs git-core java-17-openjdk-headless python3 python3-devel \
     && curl -LO "https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz" \
     && tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz \
     && rm go${GO_VERSION}.linux-amd64.tar.gz \
@@ -134,8 +131,9 @@ RUN echo -e "[nodejs]\nname=nodejs\nstream=19\nprofiles=\nstate=enabled\n" > /et
     && echo 'extension=timezonedb.so' >> /etc/php.ini \
     && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && php composer-setup.php \
     && mv composer.phar /usr/local/bin/composer \
-    && pip3 install --no-cache-dir poetry \
+    && pip3 install --no-cache-dir poetry==1.3.2 \
     && poetry config virtualenvs.create false \
+    && poetry config installer.modern-installation false \
     && cd /usr/local/src/ && poetry install --no-cache --without dev \
     && npm install --no-audit --progress=false --omit=dev -g @cyclonedx/cdxgen @microsoft/rush --unsafe-perm \
     && mkdir -p /opt/phpsast && cd /opt/phpsast && composer require --quiet --no-cache --dev vimeo/psalm \

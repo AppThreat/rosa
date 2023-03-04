@@ -1,0 +1,44 @@
+version: "3.9"
+services:
+  cdxgen:
+    image: ghcr.io/appthreat/cdxgen
+    ports:
+      - "9090:9090"
+    volumes:
+      - /Volumes/Work:/app # Set this to your directory containing sources
+      - /tmp:/tmp
+    command: cdxgen --server --server-host 0.0.0.0 --server-port 9090
+
+  depscan:
+    image: ghcr.io/appthreat/dep-scan
+    ports:
+      - "7070:7070"
+    volumes:
+      - /Volumes/Work:/app # Set this to your directory containing sources
+      - /tmp:/tmp
+    entrypoint: depscan --server --server-host 0.0.0.0 --server-port 7070 --cdxgen-server http://cdxgen:9090
+    environment:
+      VDB_HOME: /tmp/vdb
+
+  joern:
+    image: ghcr.io/appthreat/joern
+    ports:
+      - "9000:9000"
+    volumes:
+      - /Volumes/Work:/app # Set this to your directory containing sources
+      - /tmp:/tmp
+    cpus: 2
+    mem_limit: 8000m
+    mem_reservation: 4000m
+    command: joern -J-Xmx4g --server --server-host 0.0.0.0 --server-port 9000 --server-auth-username admin --server-auth-password admin
+
+  polynote:
+    image: ghcr.io/appthreat/polynote
+    volumes:
+      - ./contrib/polynote/notebooks:/opt/notebooks # Set this to your notebook directory
+      - ./contrib/polynote/config.yml:/opt/config/config.yml
+      - /tmp:/tmp
+      - ./:/opt/joern_lib
+    ports:
+      - "8192:8192"
+    command: --config /opt/config/config.yml
