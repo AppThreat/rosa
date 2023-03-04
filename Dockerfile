@@ -133,7 +133,6 @@ RUN echo -e "[nodejs]\nname=nodejs\nstream=19\nprofiles=\nstate=enabled\n" > /et
     && mv composer.phar /usr/local/bin/composer \
     && pip3 install --no-cache-dir poetry==1.3.2 \
     && poetry config virtualenvs.create false \
-    && poetry config installer.modern-installation false \
     && cd /usr/local/src/ && poetry install --no-cache --without dev \
     && npm install --no-audit --progress=false --omit=dev -g @cyclonedx/cdxgen @microsoft/rush --unsafe-perm \
     && mkdir -p /opt/phpsast && cd /opt/phpsast && composer require --quiet --no-cache --dev vimeo/psalm \
