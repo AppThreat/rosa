@@ -141,3 +141,4 @@ AppDir/
 appimage-builder-cache/
 *.AppImage
 *.AppImage.zsync
+workspace/

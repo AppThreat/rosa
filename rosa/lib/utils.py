@@ -466,10 +466,4 @@ def to_fingerprint_hash(str_to_hash, digest_size):
 
 def get_env():
     env = os.environ.copy()
-    if (os.getenv("USE_JAVA_8") or os.getenv("WITH_JAVA_8")) and os.getenv(
-        "SCAN_JAVA_8_HOME"
-    ):
-        env["SCAN_JAVA_HOME"] = os.getenv("SCAN_JAVA_8_HOME")
-    elif os.getenv("SCAN_JAVA_11_HOME"):
-        env["SCAN_JAVA_HOME"] = os.getenv("SCAN_JAVA_11_HOME")
     return env

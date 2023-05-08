@@ -16,7 +16,8 @@ ENV GOSEC_VERSION=2.15.0 \
     SB_VERSION=4.7.3 \
     GOPATH=/opt/app-root/go \
     GO_VERSION=1.20.4 \
-    PATH=${PATH}:${GRADLE_HOME}/bin:${GOPATH}/bin:
+    ORAS_VERSION="1.0.0" \
+    PATH=${PATH}:${GRADLE_HOME}/bin:${GOPATH}/bin:/usr/local/bin/appthreat:
 
 USER root
 
@@ -33,7 +34,17 @@ RUN mkdir -p /usr/local/bin/appthreat \
     && curl -LO "https://github.com/securego/gosec/releases/download/v${GOSEC_VERSION}/gosec_${GOSEC_VERSION}_linux_amd64.tar.gz" \
     && tar -C /usr/local/bin/appthreat/ -xvf gosec_${GOSEC_VERSION}_linux_amd64.tar.gz \
     && chmod +x /usr/local/bin/appthreat/gosec \
-    && rm gosec_${GOSEC_VERSION}_linux_amd64.tar.gz
+    && rm gosec_${GOSEC_VERSION}_linux_amd64.tar.gz \
+    && curl -LO "https://github.com/oras-project/oras/releases/download/v${ORAS_VERSION}/oras_${ORAS_VERSION}_linux_amd64.tar.gz" \
+    && mkdir -p oras-install/ \
+    && tar -zxf oras_${ORAS_VERSION}_*.tar.gz -C oras-install/ \
+    && sudo mv oras-install/oras /usr/local/bin/appthreat/ \
+    && chmod +x /usr/local/bin/appthreat/oras \
+    && rm -rf oras_${ORAS_VERSION}_*.tar.gz oras-install/ \
+    && oras pull ghcr.io/appthreat/cpggen-bin:v1 -o /usr/local/bin/appthreat/ \
+    && rm /usr/local/bin/appthreat/cpggen \
+    && mv /usr/local/bin/appthreat/cpggen-linux-amd64 /usr/local/bin/appthreat/cpg \
+    && chmod +x /usr/local/bin/appthreat/cpg
 RUN curl -LO "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip" \
     && unzip -q gradle-${GRADLE_VERSION}-bin.zip -d /opt/ \
     && chmod +x /opt/gradle-${GRADLE_VERSION}/bin/gradle \
@@ -80,14 +91,12 @@ LABEL maintainer="appthreat" \
 ENV APP_SRC_DIR=/usr/local/src \
     DEPSCAN_CMD="/usr/bin/depscan" \
     PMD_CMD="/opt/pmd-bin/bin/run.sh pmd" \
-    PMD_JAVA_OPTS="--enable-preview" \
+    PMD_JAVA_OPTS="" \
     SB_VERSION=4.7.3 \
     PMD_VERSION=6.55.0 \
     SPOTBUGS_HOME=/opt/spotbugs \
-    JAVA_HOME=/usr/lib/jvm/jre-11-openjdk \
-    SCAN_JAVA_HOME=/usr/lib/jvm/jre-11-openjdk \
-    SCAN_JAVA_11_HOME=/usr/lib/jvm/jre-11-openjdk \
-    SCAN_JAVA_8_HOME=/usr/lib/jvm/jre-1.8.0 \
+    JAVA_HOME="/etc/alternatives/jre_17" \
+    JAVA_17_HOME="/etc/alternatives/jre_17" \
     GRADLE_VERSION=8.1.1 \
     GRADLE_HOME=/opt/gradle \
     GRADLE_CMD=gradle \
@@ -117,9 +126,6 @@ RUN echo -e "[nodejs]\nname=nodejs\nstream=20\nprofiles=\nstate=enabled\n" > /et
     && tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz \
     && rm go${GO_VERSION}.linux-amd64.tar.gz \
     && npm install --unsafe-perm -g yarn \
-    && pecl channel-update pecl.php.net \
-    && pecl install timezonedb \
-    && echo 'extension=timezonedb.so' >> /etc/php.ini \
     && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && php composer-setup.php \
     && mv composer.phar /usr/local/bin/composer \
     && pip3 install --no-cache-dir poetry==1.3.2 \

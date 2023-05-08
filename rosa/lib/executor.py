@@ -10,23 +10,6 @@ import rosa.lib.utils as utils
 from rosa.lib.logger import DEBUG, LOG, console
 
 
-def use_java(env):
-    """
-    Method to use the right java environment based on the environment variables SCAN_JAVA_HOME, SCAN_JAVA_11_HOME
-    :param env: Copy of all environment variables
-    :return: Env list with PATH suffixed by correct java home
-    """
-    if env.get("SCAN_JAVA_HOME"):
-        env["PATH"] = env["PATH"] + ":" + os.path.join(env.get("SCAN_JAVA_HOME"), "bin")
-        env["JAVA_HOME"] = env.get("SCAN_JAVA_HOME")
-    elif env.get("SCAN_JAVA_11_HOME"):
-        env["JAVA_HOME"] = env.get("SCAN_JAVA_11_HOME")
-        env["PATH"] = (
-            env["PATH"] + ":" + os.path.join(env.get("SCAN_JAVA_11_HOME"), "bin")
-        )
-    return env
-
-
 def should_suppress_output(type_str, command):
     """
     Method to find if the tool's output should be suppressed
@@ -84,7 +67,6 @@ def exec_tool(  # scan:ignore
     ) as progress:
         task = None
         try:
-            env = use_java(env)
             LOG.debug('⚡︎ Executing {} "{}"'.format(tool_name, " ".join(args)))
             stderr = subprocess.DEVNULL
             if LOG.isEnabledFor(DEBUG):

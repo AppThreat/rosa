@@ -24,8 +24,6 @@ services:
       - "7072:7072"
     volumes:
       - /tmp:/tmp
-    mem_limit: 128000m
-    mem_reservation: 64000m
     command: cpggen --server --server-host 0.0.0.0 --server-port 7072
 
   joern:
@@ -34,10 +32,7 @@ services:
       - "9000:9000"
     volumes:
       - /tmp:/tmp
-    cpus: 2
-    mem_limit: 8000m
-    mem_reservation: 4000m
-    command: joern -J-Xmx4g --server --server-host 0.0.0.0 --server-port 9000 --server-auth-username admin --server-auth-password admin
+    command: joern --server --server-host 0.0.0.0 --server-port 9000 --server-auth-username admin --server-auth-password admin
 
   polynote:
     image: ghcr.io/appthreat/polynote
