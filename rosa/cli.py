@@ -1,21 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# This file is part of Scan.
-
-# Scan is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# Scan is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with Scan.  If not, see <https://www.gnu.org/licenses/>.
-
 """
 Risk Oriented Security Analysis
 """
@@ -38,9 +23,9 @@ from rosa.lib.builder import auto_build
 from rosa.lib.executor import exec_tool, execute_default_cmd
 from rosa.lib.integration import provider
 from rosa.lib.logger import LOG, console
-from rosa.lib.telemetry import track
 from rosa.lib.pyt.cfg_analyzer import deep_analysis
 from rosa.lib.pyt.formatters.json import report as py_json_report
+from rosa.lib.telemetry import track
 
 product_logo = """
 ██████╗  ██████╗ ███████╗ █████╗
@@ -248,7 +233,6 @@ def python_scan(src, reports_dir, repo_context):
       repo_context Repo context
     """
     py_deep_scan(src, reports_dir, repo_context)
-    bandit_scan(src, reports_dir, repo_context)
 
 
 def py_deep_scan(src, reports_dir, repo_context):
@@ -284,51 +268,6 @@ def py_deep_scan(src, reports_dir, repo_context):
         )
     except Exception as e:
         LOG.debug(e)
-
-
-def bandit_scan(src, reports_dir, repo_context):
-    """
-    Method to initiate bandit scan of the python codebase
-
-    Args:
-      src Project dir
-      reports_dir Directory for output reports
-      repo_context Repo context
-    """
-    convert_args = []
-    report_fname = utils.get_report_file("source-python", reports_dir, ext_name="json")
-    convert_args = [
-        "-o",
-        report_fname,
-        "-f",
-        "json",
-    ]
-    bandit_cmd = "bandit"
-    bandit_args = [
-        bandit_cmd,
-        "-r",
-        "-a",
-        "vuln",
-        "-n",
-        "3",
-        "-s",
-        config.get("BANDIT_IGNORED_RULES", ""),
-        "-iii",
-        "-ll",
-        *convert_args,
-        "-x",
-        ",".join(config.get("ignore_directories")),
-        src,
-    ]
-    exec_tool("source-python", bandit_args)
-    crep_fname = utils.get_report_file("source-python", reports_dir, ext_name="sarif")
-    convertLib.convert_file(
-        "source-python",
-        bandit_args[1:],
-        src,
-        report_fname,
-        crep_fname,
-    )
 
 
 def java_scan(src, reports_dir, repo_context):
@@ -493,9 +432,7 @@ def bomgen(src, reports_dir, repo_context):
 
 def create_empty_result(src_dir, reports_dir):
     # Create empty sarif file to prevent codeql upload action from failing
-    crep_fname = utils.get_report_file(
-        "empty-scan", reports_dir, ext_name="sarif"
-    )
+    crep_fname = utils.get_report_file("empty-scan", reports_dir, ext_name="sarif")
     convertLib.report("empty-scan", [], src_dir, None, [], [], crep_fname, None)
 
 
@@ -605,9 +542,7 @@ def main():
     agg_fname = None
     baseline_fname = os.path.join(reports_dir, ".sastscan.baseline")
     if scan_mode != "ide":
-        agg_fname = utils.get_report_file(
-            "scan-full", reports_dir, ext_name="json"
-        )
+        agg_fname = utils.get_report_file("scan-full", reports_dir, ext_name="json")
     report_summary, build_status = analysis.summary(
         sarif_files=sarif_files,
         depscan_files=depscan_files,

@@ -1,18 +1,3 @@
-# This file is part of Scan.
-
-# Scan is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# Scan is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with Scan.  If not, see <https://www.gnu.org/licenses/>.
-
 import json
 import os
 import sys
@@ -274,34 +259,6 @@ scan_tools_args_map = {
             get("TOOLS_CONFIG_DIR") + "/rules-pmd.xml",
         ]
     },
-    "arm": {
-        "source-arm": [
-            "checkov",
-            "-s",
-            "--framework",
-            "arm",
-            "--quiet",
-            "--skip-download",
-            "-o",
-            "json",
-            "-d",
-            "%(src)s",
-        ]
-    },
-    "aws": {
-        "source-aws": [
-            "checkov",
-            "-s",
-            "--framework",
-            "cloudformation",
-            "--quiet",
-            "--skip-download",
-            "-o",
-            "json",
-            "-d",
-            "%(src)s",
-        ]
-    },
     "bom": ["cdxgen", "-r", "-o", "%(report_fname_prefix)s.json", "%(src)s"],
     "credscan": [
         "gitleaks",
@@ -395,34 +352,6 @@ scan_tools_args_map = {
             "%(report_fname_prefix)s.json",
         ]
     },
-    "dockerfile": {
-        "source-dockerfile": [
-            "checkov",
-            "-s",
-            "--framework",
-            "dockerfile",
-            "--quiet",
-            "--skip-download",
-            "-o",
-            "json",
-            "-d",
-            "%(src)s",
-        ]
-    },
-    "containerfile": {
-        "source-containerfile": [
-            "checkov",
-            "-s",
-            "--framework",
-            "dockerfile",
-            "--quiet",
-            "--skip-download",
-            "-o",
-            "json",
-            "-d",
-            "%(src)s",
-        ]
-    },
     "go": {
         "source-go": [
             "gosec",
@@ -509,18 +438,6 @@ scan_tools_args_map = {
         ],
     },
     "kubernetes": {
-        "source-k8s": [
-            "checkov",
-            "-s",
-            "--framework",
-            "kubernetes",
-            "--quiet",
-            "--skip-download",
-            "-o",
-            "json",
-            "-d",
-            "%(src)s",
-        ],
         "kubesec": ["kubesec", "scan", "(filelist=yaml)"],
         "kube-score": [
             "kube-score",
@@ -643,18 +560,6 @@ scan_tools_args_map = {
         ],
     },
     "terraform-ide": {
-        "source-tf": [
-            "checkov",
-            "-s",
-            "--framework",
-            "terraform",
-            "--quiet",
-            "--skip-download",
-            "-o",
-            "json",
-            "-d",
-            "%(src)s",
-        ],
         "lint-tf": [
             "tfsec",
             "--format",
@@ -664,20 +569,6 @@ scan_tools_args_map = {
             "--no-colour",
             "%(src)s",
         ],
-    },
-    "terraform": {
-        "source-tf": [
-            "checkov",
-            "-s",
-            "--framework",
-            "terraform",
-            "--quiet",
-            "--skip-download",
-            "-o",
-            "json",
-            "-d",
-            "%(src)s",
-        ]
     },
     "vf": {
         "source-vf": [
@@ -714,20 +605,6 @@ scan_tools_args_map = {
             "-R",
             get("TOOLS_CONFIG_DIR") + "/rules-pmd.xml",
         ]
-    },
-    "serverless": {
-        "source-serverless": [
-            "checkov",
-            "-s",
-            "--framework",
-            "serverless",
-            "--quiet",
-            "--skip-download",
-            "-o",
-            "json",
-            "-d",
-            "%(src)s",
-        ],
     },
 }
 
