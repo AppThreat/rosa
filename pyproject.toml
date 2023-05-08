@@ -3,7 +3,7 @@ name = "rosa"
 version = "3.0.0"
 description = "Risk Oriented Security Analysis tool from AppThreat"
 authors = ["Team AppThreat <cloud@appthreat.com>"]
-license = "GPL-3.0-or-later"
+license = "Apache-2.0"
 readme = "README.md"
 packages = [{include = "rosa"}]
 homepage = "https://github.com/AppThreat/rosa"

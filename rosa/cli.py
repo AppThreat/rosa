@@ -21,7 +21,6 @@ import rosa.lib.convert as convertLib
 import rosa.lib.utils as utils
 from rosa.lib.builder import auto_build
 from rosa.lib.executor import exec_tool, execute_default_cmd
-from rosa.lib.integration import provider
 from rosa.lib.logger import LOG, console
 from rosa.lib.pyt.cfg_analyzer import deep_analysis
 from rosa.lib.pyt.formatters.json import report as py_json_report
@@ -245,7 +244,6 @@ def py_deep_scan(src, reports_dir, repo_context):
       repo_context Repo context
     """
     report_fname = utils.get_report_file("taint-python", reports_dir, ext_name="json")
-    web_route_only = config.get("WEB_ROUTE_ONLY", False)
     py_files = utils.find_files(src, ".py")
     LOG.debug(f"Scanning {len(py_files)} python files ...")
     try:
@@ -253,7 +251,7 @@ def py_deep_scan(src, reports_dir, repo_context):
             src, py_files
         )
         if not vulnerabilities and not insights:
-            LOG.debug(f"taint-python has not found any vulnerabilities or insights")
+            LOG.debug("taint-python has not found any vulnerabilities or insights")
             return
         py_json_report(vulnerabilities, insights, report_fname)
         crep_fname = utils.get_report_file(

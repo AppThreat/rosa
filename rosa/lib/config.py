@@ -293,17 +293,6 @@ scan_tools_args_map = {
         "--leaks-exit-code=0",
         "--report=%(report_fname_prefix)s.json",
     ],
-    "bash": [
-        "shellcheck",
-        "-a",
-        "--shell=%(type)s",
-        "-f",
-        "json",
-        "-S",
-        "error",
-        "--color=never",
-        "(filelist=sh)",
-    ],
     "depscan": [
         get("DEPSCAN_CMD"),
         "--no-banner",

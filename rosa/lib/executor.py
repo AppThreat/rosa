@@ -8,7 +8,6 @@ import rosa.lib.config as config
 import rosa.lib.convert as convertLib
 import rosa.lib.utils as utils
 from rosa.lib.logger import DEBUG, LOG, console
-from rosa.lib.telemetry import track
 
 
 def use_java(env):
