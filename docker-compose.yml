@@ -6,6 +6,7 @@ services:
       - "9090:9090"
     volumes:
       - /tmp:/tmp
+      - $PWD:/app
     command: cdxgen --server --server-host 0.0.0.0 --server-port 9090
 
   depscan:
@@ -14,24 +15,27 @@ services:
       - "7070:7070"
     volumes:
       - /tmp:/tmp
+      - $PWD:/app
     entrypoint: depscan --server --server-host 0.0.0.0 --server-port 7070 --cdxgen-server http://cdxgen:9090
     environment:
       VDB_HOME: /tmp/vdb
 
   cpggen:
-    image: ghcr.io/appthreat/cpggen:main
+    image: ghcr.io/appthreat/cpggen-oss:main
     ports:
       - "7072:7072"
     volumes:
       - /tmp:/tmp
+      - $PWD:/app
     command: cpggen --server --server-host 0.0.0.0 --server-port 7072
 
   joern:
-    image: ghcr.io/joernio/joern:master
+    image: ghcr.io/appthreat/cpggen-oss:main
     ports:
       - "9000:9000"
     volumes:
       - /tmp:/tmp
+      - $PWD:/app
     command: joern --server --server-host 0.0.0.0 --server-port 9000 --server-auth-username admin --server-auth-password admin
 
   polynote:
