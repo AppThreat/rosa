@@ -1,4 +1,4 @@
-FROM almalinux/9-minimal:latest as builder
+FROM almalinux:9.2-minimal as builder
 
 ENV GOSEC_VERSION=2.15.0 \
     TFSEC_VERSION=1.28.1 \
@@ -75,7 +75,7 @@ RUN curl -L "https://github.com/detekt/detekt/releases/download/v${DETEKT_VERSIO
     && curl -LO "https://repo1.maven.org/maven2/com/mebigfatguy/sb-contrib/sb-contrib/${SB_CONTRIB_VERSION}/sb-contrib-${SB_CONTRIB_VERSION}.jar" \
     && mv sb-contrib-${SB_CONTRIB_VERSION}.jar /opt/spotbugs-${SB_VERSION}/plugin/sb-contrib.jar
 
-FROM almalinux/9-minimal:latest
+FROM almalinux:9.2-minimal
 
 LABEL maintainer="appthreat" \
       org.opencontainers.image.authors="Team AppThreat <cloud@appthreat.com>" \
@@ -119,9 +119,13 @@ COPY . /usr/local/src/
 USER root
 
 RUN echo -e "[nodejs]\nname=nodejs\nstream=20\nprofiles=\nstate=enabled\n" > /etc/dnf/modules.d/nodejs.module \
+    && microdnf module enable maven php -y \
     && microdnf install -y php php-curl php-zip php-bcmath php-json php-pear php-mbstring php-devel make gcc \
       findutils tar shadow-utils unzip zip sudo xz wget which maven \
-      nodejs jq git-core java-17-openjdk-headless python3 python3-devel \
+      nodejs jq git-core java-17-openjdk-headless python3.11 python3.11-devel python3.11-pip \
+    && alternatives --install /usr/bin/python3 python /usr/bin/python3.11 1 \
+    && python3 --version \
+    && python3 -m pip install --upgrade pip \
     && curl -LO "https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz" \
     && tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz \
     && rm go${GO_VERSION}.linux-amd64.tar.gz \
@@ -134,7 +138,7 @@ RUN echo -e "[nodejs]\nname=nodejs\nstream=20\nprofiles=\nstate=enabled\n" > /et
     && npm install --no-audit --progress=false --omit=dev -g @cyclonedx/cdxgen @microsoft/rush --unsafe-perm \
     && mkdir -p /opt/phpsast && cd /opt/phpsast && composer require --quiet --no-cache --dev vimeo/psalm \
     && rm -rf /var/cache/yum \
-    && microdnf remove -y python3-devel php-fpm php-devel php-pear automake make gcc gcc-c++ libtool \
+    && microdnf remove -y python3.11-devel php-fpm php-devel php-pear automake make gcc gcc-c++ libtool \
     && microdnf clean all
 
 WORKDIR /app
