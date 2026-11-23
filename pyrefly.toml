@@ -1,0 +1,12 @@
+# The default (full) preset reports 256 errors on this codebase, most of
+# them in the vendored rosa/lib/pyt engine; the high-confidence basic
+# preset gates CI while annotation work catches up.
+preset = "basic"
+
+project-includes = [
+    "**/*.py*",
+]
+project-excludes = [
+    "**/__pycache__",
+    "**/.venv",
+]
